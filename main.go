@@ -4,6 +4,7 @@ import (
 
 	// "database/sql"
 	"fmt"
+	"net/http"
 	"mini_project/handlers"
 	"mini_project/models"
 
@@ -12,15 +13,20 @@ import (
 
 func main() {
 	handlers.ConnectDB()
-	fmt.Println("Press 1 to Add User")
-	fmt.Println("Press 2 to Find User")
-	var n int
-	fmt.Scanln(&n)
-	if n == int(1) {
-		handlers.AddUsers()
-	} else if n == 2 {
-		handlers.UserDetails()
-	}
+
+	http.HandleFunc("/register",handlers.RegisterHandle)
+	fmt.Println("Server running at http://localhost:8080/register")
+	http.ListenAndServe(":8080", nil)
+
+	// fmt.Println("Press 1 to Add User")
+	// fmt.Println("Press 2 to Find User")
+	// var n int
+	// fmt.Scanln(&n)
+	// if n == int(1) {
+	// 	handlers.AddUsers()
+	// } else if n == 2 {
+	// 	handlers.UserDetails()
+	// }
 	defer models.Db.Close()
 }
 
