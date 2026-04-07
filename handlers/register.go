@@ -7,17 +7,24 @@ import (
 )
 
 func RegisterHandle(w http.ResponseWriter, r *http.Request) {
-	if r.Method == "post" {
-		Name := r.FormValue("name")
+	if r.Method == "POST" {
+		Name1 := r.FormValue("name")
 		Email := r.FormValue("email")
-		Phone := r.FormValue("phone")
+		Phone := r.FormValue("mobile")
 		Country := r.FormValue("country")
-		sqlst := `insert into information(name,email,phone,country) values($1,$2,$3,$4)`
-		_, models.Err = models.Db.Exec(sqlst, Name, Email, Phone, Country)
-		if models.Err != nil {
-			panic(models.Err)
+		Pass := r.FormValue("pass")
+		ConfPass := r.FormValue("confpass")
+		if Pass!=ConfPass{
+			http.Error(w,"Password doesn't match",400)
+			return
 		}
-		fmt.Println(w, "User Register succesfully")
+		sqlst := `insert into information (name,email,phone,country,password) values($1,$2,$3,$4,$5)`
+		_, err := models.Db.Exec(sqlst, Name1, Email, Phone, Country,Pass)
+		if err != nil {
+			http.Error(w, err.Error(), 500)
+			return
+		}
+		fmt.Fprintln(w, "User Register succesfully")
 		return
 	}
 	http.ServeFile(w, r, "templates/register.html")

@@ -4,31 +4,38 @@ import (
 
 	// "database/sql"
 	"fmt"
-	"net/http"
 	"mini_project/handlers"
 	"mini_project/models"
+	"net/http"
 
 	_ "github.com/lib/pq"
 )
 
+//	func registerHandle(w http.ResponseWriter, r *http.Request) {
+//		fmt.Fprintln(w, "Hello world")
+//	}
 func main() {
 	handlers.ConnectDB()
 
-	http.HandleFunc("/register",handlers.RegisterHandle)
-	fmt.Println("Server running at http://localhost:8080/register")
+	http.HandleFunc("/register", handlers.RegisterHandle)
+	fmt.Println(`Server running at http://localhost:8080/register`)
 	http.ListenAndServe(":8080", nil)
-
-	// fmt.Println("Press 1 to Add User")
-	// fmt.Println("Press 2 to Find User")
-	// var n int
-	// fmt.Scanln(&n)
-	// if n == int(1) {
-	// 	handlers.AddUsers()
-	// } else if n == 2 {
-	// 	handlers.UserDetails()
-	// }
 	defer models.Db.Close()
 }
+
+// http.HandleFunc("/register",registerHandle)
+// http.ListenAndServe(":8080",nil)
+// fmt.Println("Press 1 to Add User")
+// fmt.Println("Press 2 to Find User")
+// var n int
+// fmt.Scanln(&n)
+// if n == int(1) {
+// 	handlers.AddUsers()
+// } else if n == 2 {
+// 	handlers.UserDetails()
+// }
+// defer models.Db.Close()
+// }
 
 // connecstr:="user=postgres password=260897 dbname=postgres sslmode=disable"
 // db,err:= sql.Open("postgres",connecstr)
