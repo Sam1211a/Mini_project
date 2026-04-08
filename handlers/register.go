@@ -40,10 +40,6 @@ func RegisterHandle(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		fmt.Fprintln(w, "User Register succesfully")
-		http.HandleFunc("/users_list", func(w http.ResponseWriter, r *http.Request) {
-			fmt.Fprintln(w, "Successfull", 500)
-		})
-		http.ServeFile(w, r, "templates/register.html/users_list.html")
 		return
 	}
 	http.ServeFile(w, r, "templates/register.html")
