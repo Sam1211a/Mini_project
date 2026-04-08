@@ -44,3 +44,24 @@ func RegisterHandle(w http.ResponseWriter, r *http.Request) {
 	}
 	http.ServeFile(w, r, "templates/register.html")
 }
+
+func LoginHandler(w http.ResponseWriter, r *http.Request) {
+	if r.Method == "POST" {
+		Emil := r.FormValue("emil")
+		Pass := r.FormValue("pass")
+		var Uname, checkPass string
+		err := models.Db.QueryRow("select name,password from information where email = $1", Emil).Scan(&Uname, &checkPass)
+		// fmt.Fprintln(w, Uname, checkPass, Emil)
+		if err != nil {
+			http.Error(w, "User not Found", 400)
+			return
+		}
+		if Pass != checkPass {
+			http.Error(w, "Password Incorrect", 400)
+			return
+		}
+		fmt.Fprintln(w, "Congratulations ! ", Uname, " Login Succesfully.")
+		return
+	}
+	http.ServeFile(w, r, "templates/login.html")
+}

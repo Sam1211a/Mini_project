@@ -18,6 +18,7 @@ func main() {
 	handlers.ConnectDB()
 
 	http.HandleFunc("/register", handlers.RegisterHandle)
+	http.HandleFunc("/login", handlers.LoginHandler)
 	fmt.Println(`Server running at http://localhost:8080/register`)
 	http.ListenAndServe(":8080", nil)
 	defer models.Db.Close()
