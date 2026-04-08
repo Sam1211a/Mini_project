@@ -12,7 +12,7 @@
         }
 
         body{
-            background: linear-gradient(135deg,#667eea,#764ba2);
+            background: linear-gradient(135deg,#667eea,#ACB6E5);
             height:100vh;
             display:flex;
             justify-content:center;
@@ -113,18 +113,24 @@
 
             <div class="input-group">
                 <label>Email</label>
-                <input type="text" name="emil" required>
+                <input type="text" name="emil" value="{{.Email}}" required>
+                {{if .EmailError}}
+                <p style="color: red;">{{.EmailError}}</p>
+                {{end}}
             </div>
 
             <div class="input-group">
                 <label>Password</label>
                 <input type="password" name="pass" required>
+                 {{if .PassEr}}
+                <p style="color: red;">{{.PassEr}}</p>
+                {{end}}
             </div>
 
             <button type="submit">Login</button>
 
             <div class="register-link">
-                Don't have account? <a href="/">Register</a>
+                Don't have account? <a href="/register">Register</a>
             </div>
 
         </form>

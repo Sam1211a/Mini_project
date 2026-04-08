@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Success Page</title>
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial, sans-serif;
+        }
+
+        body{
+            height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            background:linear-gradient(135deg,#667eea,#ACB6E5,#334155);
+        }
+
+        .success-box{
+            width:450px;
+            padding:40px;
+            text-align:center;
+            background:white;
+            border-radius:20px;
+            box-shadow:0 8px 30px rgba(0,0,0,0.3);
+        }
+
+        .icon{
+            font-size:60px;
+            color:#22c55e;
+            margin-bottom:20px;
+        }
+
+        h1{
+            color:#333;
+            margin-bottom:15px;
+            font-size:30px;
+        }
+
+        p{
+            color:#555;
+            font-size:16px;
+            margin-bottom:25px;
+            line-height:1.6;
+        }
+
+        .login-btn{
+            display:inline-block;
+            padding:14px 35px;
+            background:#38bdf8;
+            color:white;
+            text-decoration:none;
+            font-size:16px;
+            border-radius:8px;
+            transition:0.3s;
+            font-weight:bold;
+        }
+
+        .login-btn:hover{
+            background:#0ea5e9;
+            transform:scale(1.05);
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="success-box">
+
+        <div class="icon">✔</div>
+
+        <h1>Account Created Successfully!</h1>
+
+        <p>
+            Click the button below to login with your new account
+            and start exploring all features.
+        </p>
+
+        <a href="/login" class="login-btn">Login Now</a>
+
+    </div>
+
+</body>
+</html>
+<!-- <!DOCTYPE html>
+<html>
+    <head>
+        <title>SuccessFully Registered</title>
+    </head>
+    <body>
+        <h1>Congratulations ! Your account created succeccfully<br><br></h1>
+        <p>Click the button to start login with your new account</p>
+        <button type="submit"><a href="/login">Login</a></button>
+    </body>
+</html> -->

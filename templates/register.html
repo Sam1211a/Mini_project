@@ -12,7 +12,7 @@
         }
 
         body{
-            background: linear-gradient(135deg,#74ebd5,#ACB6E5);
+            background: linear-gradient(135deg,#667eea,#ACB6E5);
             height:100vh;
             display:flex;
             justify-content:center;
@@ -62,7 +62,7 @@
         button{
             width:100%;
             padding:12px;
-            background:#74ebd5;
+            background:#15ef48;
             border:none;
             color:white;
             font-size:16px;
@@ -81,37 +81,55 @@
 
     <div class="container">
         <h2>Registration Form</h2>
-
         <form method="post" action="/register">
-
+            
+            
             <div class="input-group">
                 <label>Name</label>
-                <input type="text" name="name" required>
+                <input type="text" name="name" value="{{.Name}}" required>
+                {{if .ErrName}}
+                <p style="color: red;">{{.ErrName}}</p>
+                {{end}}
             </div>
-
+            
             <div class="input-group">
                 <label>Email</label>
-                <input type="text" name="email" required>
+                <input type="text" name="email" value="{{.Email}}" required>
+              {{if .Error}}
+                <p style="color: red;">{{.Error}}</p>
+                {{end}}
             </div>
 
             <div class="input-group">
                 <label>Country</label>
-                <input type="text" name="country" required>
+                <input type="text" name="country" value="{{.Country}}" required>
+                {{if .ErrCountry}}
+                <p style="color: red;">{{.ErrCountry}}</p>
+                {{end}}
             </div>
-
+            
             <div class="input-group">
                 <label>Phone</label>
-                <input type="text" name="mobile" required>
+                <input type="text" name="mobile" value="{{.Phone}}" required>
+                {{if .PhnError}}
+                <p style="color: red;">{{.PhnError}}</p>
+                {{end}}
             </div>
 
             <div class="input-group">
                 <label>Password</label>
                 <input type="password" name="pass" required>
+                {{if .ErrPass}}
+                <p style="color: red;">{{.ErrPass}}</p>
+                {{end}}
             </div>
 
             <div class="input-group">
                 <label>Confirm Password</label>
-                <input type="password" name="confpass" required>
+                <input type="password" name="confpass"  required>
+                {{if .PassError}}
+                <p style="color: red;">{{.PassError}}</p>
+                {{end}}
             </div>
 
             <button type="submit">Register</button><br><br>
