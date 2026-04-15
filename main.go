@@ -19,8 +19,11 @@ func main() {
 
 	http.HandleFunc("/register", handlers.RegisterHandle)
 	http.HandleFunc("/login", handlers.LoginHandler)
-	fmt.Println(`Server running at http://localhost:8080/register`)
+	http.HandleFunc("/dashboard", handlers.DashboardHandler)
+	http.HandleFunc("/edit_profile", handlers.EditProfileHandle)
+	fmt.Println(`Server running at http://localhost:8080/login`)
 	http.ListenAndServe(":8080", nil)
+	fmt.Println("After print")
 	defer models.Db.Close()
 }
 

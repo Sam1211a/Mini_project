@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Sidebar Profile UI</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial;
+    display: flex;
+    background: #f4f6f9;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 260px;
+    height: 100vh;
+    background: #ffffff;
+    padding: 20px;
+    border-right: 1px solid #ddd;
+
+    display: flex;
+    flex-direction: column;
+}
+
+/* Profile */
+.profile {
+    text-align: center;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.profile img {
+    width: 90px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.profile h3 {
+    margin: 5px 0;
+}
+
+.profile p {
+    font-size: 13px;
+    color: gray;
+    margin: 3px 0;
+}
+
+/* Edit Button */
+.edit-btn {
+    margin-top: 10px;
+    display: inline-block;
+    padding: 8px 15px;
+    background: #4a6cf7;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.edit-btn:hover {
+    background: #3b5be0;
+}
+
+/* Menu */
+.menu {
+    margin-top: 20px;
+}
+
+.menu a {
+    display: block;
+    padding: 10px;
+    border-radius: 6px;
+    text-decoration: none;
+    color: black;
+}
+
+.menu a:hover {
+    background: #f0f3ff;
+    color: #4a6cf7;
+}
+
+/* Bottom */
+.bottom {
+    margin-top: auto;
+}
+
+.logout {
+    display: block;
+    padding: 10px;
+    background: #f8d7da;
+    color: #d63031;
+    text-align: center;
+    border-radius: 6px;
+    text-decoration: none;
+}
+
+.logout:hover {
+    background: #f5c6cb;
+}
+
+/* Main */
+.main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Demo box */
+.box {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- Sidebar -->
+<div class="sidebar">
+    <h2 style="color: #552ba8;">Dashboard</h2>
+    <!-- Profile -->
+    <div class="profile">
+        <img src="E:\024A9721.CR2">
+        <h3 style="color: #3b5be0;">{{.Name}}</h3>
+       <form>
+       <p> <b>Email:</b>{{.Email}}</p><br>
+       <p><b>Country:</b>{{.Country}}</p><br>
+        <p><b>Phone:</b>{{.Phn}}</p>
+        </form>
+
+        <!-- Edit button under profile -->
+        <a href="/edit_profile" class="edit-btn">Edit Profile</a>
+    </div>
+
+    <!-- Menu -->
+    <div class="menu">
+        <!-- <a href="dashboard.html">Dashboard</a> -->
+        <!-- <a href="profile.html">Profile</a> -->
+        <a href="#">Orders</a>
+    </div>
+
+    <!-- Bottom Logout -->
+    <div class="bottom">
+        <a href="/login" class="logout">Logout</a>
+    </div>
+
+</div>
+
+<!-- Main -->
+<div class="main">
+    <div class="box">
+        <h2>Dashboard Content</h2>
+        <p>এখানে তোমার main data show হবে</p>
+    </div>
+</div>
+
+</body>
+</html>
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Profile</title>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial;
+    }
+
+    body {
+        display: flex;
+        background: #f4f6f9;
+    }
+
+    .sidebar {
+        width: 220px;
+        height: 100vh;
+        background: white;
+        padding: 20px;
+        border-right: 1px solid #ddd;
+    }
+
+    .sidebar h2 {
+        color: #4a6cf7;
+        margin-bottom: 20px;
+    }
+
+    .sidebar ul {
+        list-style: none;
+    }
+
+    .sidebar ul li {
+        margin: 10px 0;
+    }
+
+    .sidebar ul li a {
+        text-decoration: none;
+        color: black;
+    }
+
+    .main {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .profile-card {
+        width: 350px;
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    img {
+        width: 100px;
+        border-radius: 50%;
+    }
+
+    .btn {
+        margin-top: 15px;
+        padding: 10px;
+        border: none;
+        background: #4a6cf7;
+        color: white;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    .sidebar ul li a {
+    text-decoration: none;
+    color: black;
+    display: block;
+}
+
+.sidebar ul li a:hover {
+    color: #4a6cf7;
+}
+</style>
+</head>
+
+<body>
+
+<div class="sidebar">
+    <h2>Dashboard</h2>
+    <ul>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="#">Project</a></li>
+        <li><a href="profile.html">Profile</a></li>
+        <li><a href="#">Team</a></li>
+        <li><a href="#">Orders</a></li>
+        <li><a href="login.html">Logout</a></li>
+    </ul>
+</div>
+
+<div class="main">
+    <div class="profile-card">
+        <img src="https://via.placeholder.com/100">
+        <h2>{{.Name}}</h2>
+        
+        <p>{{.Email}}</p>
+        <p>Country: {{.Country}}</p>
+        <p>Phone: {{.Phn}}</p>
+
+        <button class="btn">Edit Profile</button>
+    </div>
+</div>
+
+</body>
+</html> -->

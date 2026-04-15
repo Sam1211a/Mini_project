@@ -74,6 +74,13 @@
         button:hover{
             background:#5ecdc3;
         }
+        select{
+    width:100%;
+    padding:12px;
+    border-radius:8px;
+    border:1px solid #ccc;
+    font-size:16px;
+}
     </style>
 </head>
 
@@ -102,15 +109,16 @@
 
             <div class="input-group">
                 <label>Country</label>
-                <input type="text" name="country" value="{{.Country}}" required>
-                {{if .ErrCountry}}
-                <p style="color: red;">{{.ErrCountry}}</p>
-                {{end}}
+                <select name="country" required>
+                    <option value="">Select Country</option>
+                    <option value="Bangladesh">Bangladesh</option>
+                </select>
+             
             </div>
             
             <div class="input-group">
                 <label>Phone</label>
-                <input type="text" name="mobile" value="{{.Phone}}" required>
+                <input type="text" value="+88" name="mobile" value="{{.Phone}}" required>
                 {{if .PhnError}}
                 <p style="color: red;">{{.PhnError}}</p>
                 {{end}}
