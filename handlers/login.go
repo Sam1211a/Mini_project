@@ -27,7 +27,8 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 			})
 			return
 		}
-		if Pass != checkPass {
+
+		if CheckPass(checkPass, Pass) == false {
 			temp.Execute(w, map[string]string{
 				"PassEr": "Incorrect Password !",
 				"Email":  Emil,

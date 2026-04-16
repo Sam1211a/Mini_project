@@ -86,8 +86,9 @@ func RegisterHandle(w http.ResponseWriter, r *http.Request) {
 			})
 			return
 		}
+		Pass, err := HashPass(Pass)
 		sqlst := `insert into information (name,email,phone,country,password) values($1,$2,$3,$4,$5)`
-		_, err := models.Db.Exec(sqlst, Name1, Email, Phone, Country, Pass)
+		_, err = models.Db.Exec(sqlst, Name1, Email, Phone, Country, Pass)
 		if err != nil {
 			http.Error(w, err.Error(), 500)
 			return
