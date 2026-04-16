@@ -7,6 +7,7 @@ import (
 )
 
 var tmpl = template.Must(template.ParseFiles("templates/dashboard.html"))
+var User1 models.Users
 
 func DashboardHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "GET" {
@@ -16,14 +17,13 @@ func DashboardHandler(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		Email := cookie.Value
-		var user1 models.Users
-		err = models.Db.QueryRow("select name,phone,country from information where email=$1", Email).Scan(&user1.Name, &user1.Phone, &user1.Country)
+		err = models.Db.QueryRow("select name,phone,country from information where email=$1", Email).Scan(&User1.Name, &User1.Phone, &User1.Country)
 
 		tmpl.Execute(w, map[string]string{
-			"Name":    user1.Name,
+			"Name":    User1.Name,
 			"Email":   Email,
-			"Country": user1.Country,
-			"Phn":     user1.Phone,
+			"Country": User1.Country,
+			"Phn":     User1.Phone,
 		})
 		// http.ServeFile(w, r, "templates/profile.html")
 	}

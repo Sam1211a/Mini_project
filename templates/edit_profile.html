@@ -5,179 +5,232 @@
 <title>Edit Profile</title>
 
 <style>
-body {
-    margin: 0;
-    font-family: Arial;
-    display: flex;
-    background: #f4f6f9;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI', sans-serif;
+}
+
+body{
+    display:flex;
+    background:#f5f7fb;
 }
 
 /* Sidebar */
-.sidebar {
-    width: 260px;
-    height: 100vh;
-    background: #ffffff;
-    padding: 20px;
-    border-right: 1px solid #ddd;
-    display: flex;
-    flex-direction: column;
+.sidebar{
+    width:260px;
+    height:100vh;
+    background:#fff;
+    padding:25px;
+    border-right:1px solid #eee;
+    display:flex;
+    flex-direction:column;
 }
 
-.profile {
-    text-align: center;
-    padding-bottom: 15px;
-    border-bottom: 1px solid #eee;
+.logo{
+    font-size:20px;
+    font-weight:bold;
+    color:#4a6cf7;
+    margin-bottom:25px;
 }
 
-.profile img {
-    width: 90px;
-    border-radius: 50%;
-    margin-bottom: 10px;
+/* Profile */
+.profile{
+    text-align:center;
+    padding:20px;
+    border-radius:12px;
+    background:#f9faff;
 }
 
-.profile h3 {
-    margin: 5px 0;
-    color: #3b5be0;
+.profile img{
+    width:80px;
+    border-radius:50%;
+    margin-bottom:10px;
 }
 
-/* Form */
-.form-group {
-    margin: 10px 0;
-    text-align: left;
+.profile h3{
+    margin:5px 0;
 }
 
-.form-group label {
-    font-size: 13px;
-    font-weight: bold;
-}
-
-.form-group input {
-    width: 100%;
-    padding: 8px;
-    margin-top: 4px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-}
-
-/* Button */
-.save-btn {
-    margin-top: 10px;
-    width: 100%;
-    padding: 10px;
-    background: #4a6cf7;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-}
-
-.save-btn:hover {
-    background: #3b5be0;
+.profile p{
+    font-size:13px;
+    color:#666;
 }
 
 /* Menu */
-.menu {
-    margin-top: 20px;
+.menu{
+    margin-top:30px;
 }
 
-.menu a {
-    display: block;
-    padding: 10px;
-    border-radius: 6px;
-    text-decoration: none;
-    color: black;
+.menu a{
+    display:block;
+    padding:10px;
+    margin-bottom:8px;
+    border-radius:8px;
+    text-decoration:none;
+    color:#333;
+    transition:0.2s;
 }
 
-.menu a:hover {
-    background: #f0f3ff;
-    color: #4a6cf7;
+.menu a:hover{
+    background:#eef2ff;
+    color:#4a6cf7;
 }
 
-/* Bottom */
-.bottom {
-    margin-top: auto;
-}
-
-.logout {
-    display: block;
-    padding: 10px;
-    background: #f8d7da;
-    color: #d63031;
-    text-align: center;
-    border-radius: 6px;
-    text-decoration: none;
+/* Logout */
+.logout{
+    margin-top:auto;
+    padding:10px;
+    text-align:center;
+    background:#ffe5e5;
+    color:#d63031;
+    border-radius:8px;
+    text-decoration:none;
 }
 
 /* Main */
-.main {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.main{
+    flex:1;
+    display:flex;
+    justify-content:center;
+    align-items:center;
 }
 
-.box {
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
+/* Form Card */
+.form-card{
+    width:380px;
+    background:#fff;
+    padding:30px;
+    border-radius:12px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.05);
+}
+
+.form-card h2{
+    margin-bottom:20px;
+    text-align:center;
+}
+
+/* Input */
+.form-group{
+    margin-bottom:15px;
+}
+
+.form-group label{
+    font-size:13px;
+    font-weight:600;
+}
+
+.form-group input,
+.form-group select{
+    width:100%;
+    padding:10px;
+    margin-top:5px;
+    border:1px solid #ddd;
+    border-radius:6px;
+}
+
+/* Button */
+.save-btn{
+    width:100%;
+    padding:10px;
+    background:#4a6cf7;
+    color:#fff;
+    border:none;
+    border-radius:6px;
+    margin-top:10px;
+    cursor:pointer;
+}
+
+.save-btn:hover{
+    background:#3b5be0;
+}
+
+/* Error */
+.error{
+    color:red;
+    font-size:12px;
 }
 </style>
-
 </head>
 
 <body>
 
 <!-- Sidebar -->
 <div class="sidebar">
-    <h2 style="color: #552ba8;">Dashboard</h2>
+    <div class="logo">Dashboard</div>
 
-    <!-- Profile Edit Form -->
     <div class="profile">
-        <img src="https://via.placeholder.com/90">
-        <h3>Edit Profile</h3>
+        <img src="https://via.placeholder.com/80">
+        <h3>{{.Name}}</h3>
+        <p>{{.Email}}</p>
+    </div>
+
+    <div class="menu">
+        <a href="/dashboard">Dashboard</a>
+        <a href="#">Orders</a>
+        <a href="/edit_profile" style="background:#eef2ff;color:#4a6cf7;">Edit Profile</a>
+    </div>
+
+    <a href="/login" class="logout">Logout</a>
+</div>
+
+<!-- Main Content -->
+<div class="main">
+    <div class="form-card">
+        <h2>Edit Profile</h2>
 
         <form method="POST" action="/edit_profile">
-            
-            <div class="form-group">
-                <label>Name</label>
-                <input type="text" name="name" value="{{.Name}}">
-            </div>
 
             <div class="form-group">
-                <label>Email</label>
-                <input type="email" name="email" value="{{.Email}}">
+                <label>Name</label>
+                <input type="text" name="name" value="{{.Name}}" required>
+                {{if .ErrName}}
+                <p class="error">{{.ErrName}}</p>
+                {{end}}
             </div>
+
+            <!-- <div class="form-group">
+                <label>Email</label>
+                <input type="email" name="email" value="{{.Email}}" required>
+            </div> -->
 
             <div class="form-group">
                 <label>Country</label>
-                <input type="text" name="country" value="{{.Country}}">
+                <select name="country" required>
+                    <option>Bangladesh</option>
+                </select>
             </div>
 
             <div class="form-group">
-                <label>Phone</label>
-                <input type="text" name="phn" value="{{.Phn}}">
-            </div>
+    <label>Phone</label>
 
-            <button type="submit" class="save-btn">Save Changes</button>
-        </form>
+    <div style="display:flex;">
+        <span style="
+            padding:12px;
+            background:#eee;
+            border:1px solid #ddd;
+            border-right:none;
+            border-radius:6px 0 0 6px;
+        ">
+            +88
+        </span>
+
+        <input 
+            type="text" 
+            name="phn" 
+            value="{{.Phn}}" 
+            required
+            style="border-radius:0 6px 6px 0;"
+        >
     </div>
 
-    <!-- Menu -->
-    <div class="menu">
-        <a href="#">Orders</a>
-    </div>
-
-    <!-- Logout -->
-    <div class="bottom">
-        <a href="/login" class="logout">Logout</a>
-    </div>
+    {{if .Err}}
+    <p class="error">{{.Err}}</p>
+    {{end}}
 </div>
-
-<!-- Main -->
-<div class="main">
-    <div class="box">
-        <h2>Edit Your Profile</h2>
-        <p>এখান থেকে তুমি তোমার তথ্য update করতে পারবে</p>
+            <button class="save-btn">Save Changes</button>
+        </form>
     </div>
 </div>
 

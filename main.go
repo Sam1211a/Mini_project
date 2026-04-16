@@ -23,7 +23,6 @@ func main() {
 	http.HandleFunc("/edit_profile", handlers.EditProfileHandle)
 	fmt.Println(`Server running at http://localhost:8080/login`)
 	http.ListenAndServe(":8080", nil)
-	fmt.Println("After print")
 	defer models.Db.Close()
 }
 

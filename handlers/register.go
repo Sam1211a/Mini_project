@@ -26,12 +26,12 @@ func RegisterHandle(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "POST" {
 		Name1 := r.FormValue("name")
 		Email := r.FormValue("email")
-		Phone := "+88" + r.FormValue("mobile")
+		Phone := r.FormValue("mobile")
 		Country := r.FormValue("country")
 		Pass := r.FormValue("pass")
 		ConfPass := r.FormValue("confpass")
 		isValidemail := strings.Contains(Email, "@")
-		isValidphn := strings.Contains(Phone, "01") && len(Phone) == 14
+		isValidphn := strings.HasPrefix(Phone, "+8801") && len(Phone) == 14
 		if Name1 == "" {
 			temp.Execute(w, map[string]string{
 				"ErrName": "All Fields are required !",

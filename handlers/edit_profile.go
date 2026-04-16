@@ -2,7 +2,9 @@ package handlers
 
 import (
 	"html/template"
+	"mini_project/models"
 	"net/http"
+	"strings"
 )
 
 var tmp = template.Must(template.ParseFiles("templates/edit_profile.html"))
@@ -15,12 +17,44 @@ func EditProfileHandle(w http.ResponseWriter, r *http.Request) {
 	Email := cookie.Value
 	if r.Method == "GET" {
 		tmp.Execute(w, map[string]string{
-			"Name":    "",
+			"Name":    User1.Name,
 			"Email":   Email,
-			"Country": "",
-			"Phn":     "",
+			"Country": User1.Country,
+			"Phn":     User1.Phone[3:],
 		})
-
+	}
+	if r.Method == "POST" {
+		user := models.Users{}
+		user.Name = strings.TrimSpace(r.FormValue("name"))
+		user.Country = r.FormValue("country")
+		user.Phone = "+88" + r.FormValue("phn")
+		if user.Name == "" || len(user.Name) < 4 {
+			tmp.Execute(w, map[string]string{
+				"ErrName": "Invalid Name",
+				"Name":    User1.Name,
+				"Email":   Email,
+				"Country": User1.Country,
+				"Phn":     User1.Phone[3:],
+			})
+			return
+		}
+		if strings.HasPrefix(user.Phone, "+8801") == false || len(user.Phone) != 14 {
+			tmp.Execute(w, map[string]string{
+				"Err":     "Invalid Phone",
+				"Name":    User1.Name,
+				"Email":   Email,
+				"Country": User1.Country,
+				"Phn":     User1.Phone[3:],
+			})
+			return
+		}
+		_, err = models.Db.Exec(`update information set name=$1, country=$2, phone=$3 where email=$4`, user.Name, user.Country, user.Phone, Email)
+		if err != nil {
+			http.Error(w, "update fail Badreq", 400)
+			return
+		}
+		http.Redirect(w, r, "/dashboard", http.StatusSeeOther)
+		return
 	}
 }
 
