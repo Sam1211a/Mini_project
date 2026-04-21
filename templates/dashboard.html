@@ -5,128 +5,140 @@
 <title>Dashboard</title>
 
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family: 'Segoe UI', sans-serif;
-}
-
-body{
-    display:flex;
-    background:#f5f7fb;
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
+body{display:flex;background:#f5f7fb;}
 
 /* Sidebar */
 .sidebar{
-    width:260px;
-    height:100vh;
-    background:#fff;
-    padding:25px;
-    border-right:1px solid #eee;
-    display:flex;
-    flex-direction:column;
+    width:260px;height:100vh;background:#fff;padding:25px;
+    border-right:1px solid #eee;display:flex;flex-direction:column;
 }
+.logo{font-size:20px;font-weight:bold;color:#4CAF50;margin-bottom:25px;}
 
-.logo{
-    font-size:20px;
-    font-weight:bold;
-    color:#4a6cf7;
-    margin-bottom:25px;
-}
-
-/* Profile Card */
-.profile{
-    text-align:center;
-    padding:20px;
-    border-radius:12px;
-    background:#f9faff;
-}
-
-.profile img{
-    width:80px;
-    border-radius:50%;
-    margin-bottom:10px;
-}
-
-.profile h3{
-    margin:5px 0;
-}
-
-.profile p{
-    font-size:13px;
-    color:#666;
-}
+.profile{text-align:center;padding:20px;border-radius:12px;background:#f9faff;}
+.profile img{width:80px;border-radius:50%;margin-bottom:10px;}
+.profile p{font-size:13px;color:#666;}
 
 .edit-btn{
-    display:inline-block;
-    margin-top:10px;
-    padding:8px 14px;
-    background:#4a6cf7;
-    color:#fff;
-    border-radius:6px;
-    text-decoration:none;
-    font-size:13px;
-}
-
-.edit-btn:hover{
-    background:#3b5be0;
+    display:inline-block;margin-top:10px;padding:8px 14px;
+    background:#4CAF50;color:#fff;border-radius:6px;text-decoration:none;
 }
 
 /* Menu */
-.menu{
-    margin-top:30px;
-}
-
+.menu{margin-top:30px;}
 .menu a{
-    display:block;
-    padding:10px;
-    margin-bottom:8px;
-    border-radius:8px;
-    text-decoration:none;
-    color:#333;
-    transition:0.2s;
+    display:block;padding:10px;margin-bottom:8px;border-radius:8px;
+    text-decoration:none;color:#333;
 }
+.menu a:hover{background:#e8f5e9;color:#4CAF50;}
 
-.menu a:hover{
-    background:#eef2ff;
-    color:#4a6cf7;
-}
-
-/* Logout */
 .logout{
-    margin-top:auto;
-    padding:10px;
-    text-align:center;
-    background:#ffe5e5;
-    color:#d63031;
-    border-radius:8px;
-    text-decoration:none;
+    margin-top:auto;padding:10px;text-align:center;
+    background:#ffe5e5;color:#d63031;border-radius:8px;text-decoration:none;
 }
 
 /* Main */
-.main{
-    flex:1;
-    padding:40px;
-}
+.main{flex:1;padding:30px;}
 
-/* Cards */
 .card{
-    background:#fff;
-    padding:20px;
-    border-radius:12px;
-    box-shadow:0 4px 12px rgba(0,0,0,0.05);
-    margin-bottom:20px;
+    background:#fff;padding:20px;border-radius:12px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.05);margin-bottom:20px;
 }
 
-.card h2{
+/* POST BOX */
+.post-box{
+    background:#fff;
+    padding:15px;
+    border-radius:12px;
+    margin-bottom:20px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.05);
+}
+
+.post-box textarea{
+    width:100%;
+    height:70px;
+    border:1px solid #ddd;
+    border-radius:8px;
+    padding:10px;
+    resize:none;
+}
+
+.post-box button{
+    margin-top:10px;
+    background:#4CAF50;
+    color:#fff;
+    padding:8px 14px;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+/* TIMELINE */
+.timeline{
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+}
+
+/* POST CARD */
+.post-card{
+    background:#fff;
+    border-radius:14px;
+    padding:18px;
+    box-shadow:0 6px 18px rgba(0,0,0,0.05);
+    transition:0.2s;
+}
+.post-card:hover{transform:translateY(-3px);}
+
+.post-top{
+    display:flex;
+    align-items:center;
+    gap:10px;
     margin-bottom:10px;
 }
 
-.grid{
-    display:grid;
-    grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
-    gap:20px;
+.avatar{width:45px;height:45px;border-radius:50%;}
+
+.user-info{display:flex;flex-direction:column;}
+
+.post-header{font-weight:600;font-size:14px;}
+.post-time{font-size:12px;color:#888;}
+
+.post-content{
+    font-size:15px;
+    margin:10px 0;
+    line-height:1.6;
+}
+
+.post-image{
+    width:100%;
+    max-height:300px;
+    object-fit:cover;
+    border-radius:10px;
+    margin-top:10px;
+}
+
+/* ACTIONS */
+.post-actions{
+    display:flex;
+    gap:15px;
+    margin-top:12px;
+}
+
+.post-actions button,
+.post-actions a{
+    font-size:13px;
+    color:#4CAF50;
+    background:none;
+    border:none;
+    cursor:pointer;
+    text-decoration:none;
+    font-weight:500;
+}
+
+.post-actions button:hover,
+.post-actions a:hover{
+    text-decoration:underline;
 }
 </style>
 </head>
@@ -142,40 +154,78 @@ body{
         <p>{{.Email}}</p>
         <p>{{.Country}}</p>
         <p>{{.Phn}}</p>
-
         <a href="/edit_profile" class="edit-btn">Edit Profile</a>
     </div>
 
     <div class="menu">
-        <a href="#">Dashboard</a>
-        <a href="#">Orders</a>
+        <a href="/dashboard" style="background:#e8f5e9;color:#4CAF50;">Dashboard</a>
+        <a href="/user_post">My Post</a>
     </div>
 
     <a href="/login" class="logout">Logout</a>
 </div>
 
 <div class="main">
+
     <div class="card">
-        <h2 style="color: #3b5be0;">Welcome, {{.Name}}</h2>
+        <h2>Welcome, {{.Name}}</h2>
     </div>
 
-    <div class="grid">
-        <div class="card">
-            <h3>Total Orders</h3>
-            <p>12</p>
+    <!-- POST BOX -->
+    <div class="post-box">
+        <form method="POST" action="/create-post">
+            <textarea name="content" placeholder="What's on your mind?" required></textarea>
+            <button type="submit">Post</button>
+        </form>
+    </div>
+
+   <!-- TIMELINE -->
+<div class="card">
+    <h2 style="margin-bottom:15px;">Timeline</h2>
+
+    <div class="timeline">
+
+        {{if .Posts}}
+        {{range .Posts}}
+
+        <div class="post-card">
+
+            <div class="post-top">
+                <img src="https://via.placeholder.com/45" class="avatar">
+                <div class="user-info">
+                    <div class="post-header">{{.UserEmail}}</div>
+                    <div class="post-time">{{.CreatedAt}}</div>
+                </div>
+            </div>
+
+            <div class="post-content">{{.Content}}</div>
+
+            <div class="post-actions">
+                <button onclick="alert('Liked 👍')">👍 Like</button>
+                <button onclick="copyPost(`{{.Content}}`)">📋 Copy</button>
+                <a href="/edit-post?id={{.ID}}">✏️ Edit</a>
+                <a href="/delete-post?id={{.ID}}" onclick="return confirm('Delete this post?')">🗑 Delete</a>
+            </div>
+
         </div>
 
-        <div class="card">
-            <h3>Completed</h3>
-            <p>8</p>
-        </div>
+        {{end}}
+        {{else}}
+        <p>No posts yet</p>
+        {{end}}
 
-        <div class="card">
-            <h3>Pending</h3>
-            <p>4</p>
-        </div>
     </div>
 </div>
+
+<p>{{len .Posts}}</p>
+
+<script>
+function copyPost(text){
+    navigator.clipboard.writeText(text).then(()=>{
+        alert("Copied!");
+    });
+}
+</script>
 
 </body>
 </html>

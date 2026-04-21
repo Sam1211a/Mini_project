@@ -14,11 +14,11 @@ func EditProfileHandle(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		panic(err)
 	}
-	Email := cookie.Value
+	models.User_Email = cookie.Value
 	if r.Method == "GET" {
 		tmp.Execute(w, map[string]string{
 			"Name":    User1.Name,
-			"Email":   Email,
+			"Email":   models.User_Email,
 			"Country": User1.Country,
 			"Phn":     User1.Phone[3:],
 		})
@@ -32,7 +32,7 @@ func EditProfileHandle(w http.ResponseWriter, r *http.Request) {
 			tmp.Execute(w, map[string]string{
 				"ErrName": "Invalid Name",
 				"Name":    User1.Name,
-				"Email":   Email,
+				"Email":   models.User_Email,
 				"Country": User1.Country,
 				"Phn":     User1.Phone[3:],
 			})
@@ -42,15 +42,15 @@ func EditProfileHandle(w http.ResponseWriter, r *http.Request) {
 			tmp.Execute(w, map[string]string{
 				"Err":     "Invalid Phone",
 				"Name":    User1.Name,
-				"Email":   Email,
+				"Email":   models.User_Email,
 				"Country": User1.Country,
 				"Phn":     User1.Phone[3:],
 			})
 			return
 		}
-		_, err = models.Db.Exec(`update information set name=$1, country=$2, phone=$3 where email=$4`, user.Name, user.Country, user.Phone, Email)
+		_, err = models.Db.Exec(`update information set name=$1, country=$2, phone=$3 where email=$4`, user.Name, user.Country, user.Phone, models.User_Email)
 		if err != nil {
-			http.Error(w, "update fail Badreq", 400)
+			http.Error(w, "Update fail Bad Req", 400)
 			return
 		}
 		http.Redirect(w, r, "/dashboard", http.StatusSeeOther)

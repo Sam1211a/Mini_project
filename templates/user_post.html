@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>My Posts</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI', sans-serif;
+}
+
+body{
+    display:flex;
+    background:#f5f7fb;
+}
+
+/* Sidebar */
+.sidebar{
+    width:260px;
+    height:100vh;
+    background:#fff;
+    padding:25px;
+    border-right:1px solid #eee;
+    display:flex;
+    flex-direction:column;
+}
+
+.logo{
+    font-size:20px;
+    font-weight:bold;
+    color:#4CAF50;
+    margin-bottom:25px;
+}
+
+.profile{
+    text-align:center;
+    padding:20px;
+    border-radius:12px;
+    background:#f9faff;
+}
+
+.profile img{
+    width:80px;
+    border-radius:50%;
+    margin-bottom:10px;
+}
+
+.profile p{
+    font-size:13px;
+    color:#666;
+}
+
+.edit-btn{
+    display:inline-block;
+    margin-top:10px;
+    padding:8px 14px;
+    background:#4CAF50;
+    color:#fff;
+    border-radius:6px;
+    text-decoration:none;
+}
+
+/* Menu */
+.menu{
+    margin-top:30px;
+}
+
+.menu a{
+    display:block;
+    padding:10px;
+    margin-bottom:8px;
+    border-radius:8px;
+    text-decoration:none;
+    color:#333;
+}
+
+.menu a:hover{
+    background:#e8f5e9;
+    color:#4CAF50;
+}
+
+/* Logout */
+.logout{
+    margin-top:auto;
+    padding:10px;
+    text-align:center;
+    background:#ffe5e5;
+    color:#d63031;
+    border-radius:8px;
+    text-decoration:none;
+}
+
+/* Main */
+.main{
+    flex:1;
+    padding:30px;
+}
+
+/* Card */
+.card{
+    background:#fff;
+    padding:20px;
+    border-radius:12px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.05);
+    margin-bottom:20px;
+}
+
+/* Table Header */
+.table-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:15px;
+}
+
+/* Table */
+.post-table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+.post-table thead{
+    background:#4CAF50;
+    color:#fff;
+}
+
+.post-table th,
+.post-table td{
+    padding:12px;
+    border-bottom:1px solid #eee;
+    text-align:left;
+}
+
+.post-table tr:hover{
+    background:#f9f9f9;
+}
+
+/* Buttons */
+.btn{
+    padding:6px 10px;
+    border-radius:6px;
+    text-decoration:none;
+    font-size:13px;
+    margin-right:5px;
+    cursor:pointer;
+}
+
+.edit{
+    background:#e3f2fd;
+    color:#1976d2;
+}
+
+.delete{
+    background:#ffe5e5;
+    color:#d63031;
+}
+
+.copy{
+    background:#e8f5e9;
+    color:#2e7d32;
+}
+
+/* MODAL */
+.modal{
+    display:none;
+    position:fixed;
+    z-index:1000;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.5);
+    justify-content:center;
+    align-items:center;
+}
+
+.modal-content{
+    background:#fff;
+    width:400px;
+    border-radius:12px;
+    padding:20px;
+}
+
+.modal textarea{
+    width:100%;
+    height:120px;
+    padding:10px;
+    border-radius:8px;
+    border:1px solid #ddd;
+}
+
+.modal-actions{
+    margin-top:15px;
+    display:flex;
+    justify-content:flex-end;
+    gap:10px;
+}
+
+.cancel{
+    background:#ccc;
+    padding:8px 14px;
+    border:none;
+    border-radius:6px;
+}
+
+.update{
+    background:#4CAF50;
+    color:#fff;
+    padding:8px 14px;
+    border:none;
+    border-radius:6px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="sidebar">
+    <div class="logo">Dashboard</div>
+
+    <div class="profile">
+        <img src="https://via.placeholder.com/80">
+        <h3>{{.Name}}</h3>
+        <p>{{.Email}}</p>
+        <p>{{.Country}}</p>
+        <p>{{.Phn}}</p>
+
+        <a href="/edit_profile" class="edit-btn">Edit Profile</a>
+    </div>
+
+    <div class="menu">
+        <a href="/dashboard">Dashboard</a>
+        <a href="/user_post" style="background:#e8f5e9;color:#4CAF50;">My Post</a>
+    </div>
+
+    <a href="/login" class="logout">Logout</a>
+</div>
+
+<div class="main">
+
+    <div class="card">
+        <h2>My Posts</h2>
+    </div>
+
+    <div class="card">
+
+        <table class="post-table">
+
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>User</th>
+                    <th>Content</th>
+                    <th>Time</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+            {{range .Posts}}
+            <tr>
+                <td>{{.ID}}</td>
+                <td>{{.UserEmail}}</td>
+                <td>{{.Content}}</td>
+                <td>{{.CreatedAt}}</td>
+                <td>
+                    <span class="btn edit" onclick="openEdit('{{.ID}}', `{{.Content}}`)">✏️</span>
+                    <a href="/delete-post?id={{.ID}}" class="btn delete">🗑</a>
+                    <span class="btn copy" onclick="copyPost(this)">📋</span>
+                </td>
+            </tr>
+            {{end}}
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+<!-- EDIT MODAL -->
+<div id="editModal" class="modal">
+    <div class="modal-content">
+
+        <h3>Edit Post</h3>
+        <input type="hidden" id="edit-id">
+
+        <textarea id="edit-content"></textarea>
+
+        <div class="modal-actions">
+            <button class="cancel" onclick="closeModal()">Cancel</button>
+            <button class="update" onclick="updatePost()">Update</button>
+        </div>
+
+    </div>
+</div>
+
+<script>
+function openEdit(id, content){
+    document.getElementById("editModal").style.display="flex";
+    document.getElementById("edit-id").value=id;
+    document.getElementById("edit-content").value=content;
+}
+
+function closeModal(){
+    document.getElementById("editModal").style.display="none";
+}
+
+function updatePost(){
+    let id=document.getElementById("edit-id").value;
+    let content=document.getElementById("edit-content").value;
+
+    fetch("/update-post",{
+        method:"POST",
+        headers:{"Content-Type":"application/x-www-form-urlencoded"},
+        body:`id=${id}&content=${content}`
+    }).then(()=> location.reload());
+}
+
+function copyPost(el){
+    let text = el.closest("tr").children[2].innerText;
+    navigator.clipboard.writeText(text);
+    alert("Copied!");
+}
+
+window.onclick = function(e){
+    let modal = document.getElementById("editModal");
+    if(e.target === modal){
+        modal.style.display="none";
+    }
+}
+</script>
+
+</body>
+</html>

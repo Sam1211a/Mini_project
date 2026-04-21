@@ -31,7 +31,7 @@ body{
 .logo{
     font-size:20px;
     font-weight:bold;
-    color:#4a6cf7;
+    color:#4CAF50;
     margin-bottom:25px;
 }
 
@@ -45,23 +45,17 @@ body{
 
 .profile img{
     width:80px;
+    height:80px;
     border-radius:50%;
+    object-fit:cover;
     margin-bottom:10px;
 }
 
-.profile h3{
-    margin:5px 0;
-}
-
-.profile p{
-    font-size:13px;
-    color:#666;
-}
+.profile h3{margin:5px 0;}
+.profile p{font-size:13px;color:#666;}
 
 /* Menu */
-.menu{
-    margin-top:30px;
-}
+.menu{margin-top:30px;}
 
 .menu a{
     display:block;
@@ -74,8 +68,8 @@ body{
 }
 
 .menu a:hover{
-    background:#eef2ff;
-    color:#4a6cf7;
+    background:#e8f5e9;
+    color:#4CAF50;
 }
 
 /* Logout */
@@ -97,9 +91,9 @@ body{
     align-items:center;
 }
 
-/* Form Card */
+/* Card */
 .form-card{
-    width:380px;
+    width:420px;
     background:#fff;
     padding:30px;
     border-radius:12px;
@@ -107,11 +101,31 @@ body{
 }
 
 .form-card h2{
-    margin-bottom:20px;
     text-align:center;
+    margin-bottom:20px;
 }
 
-/* Input */
+/* Avatar upload */
+.avatar-upload{
+    text-align:center;
+    margin-bottom:20px;
+}
+
+.avatar-upload img{
+    width:90px;
+    height:90px;
+    border-radius:50%;
+    object-fit:cover;
+    margin-bottom:10px;
+    border:3px solid #4CAF50;
+}
+
+.avatar-upload input{
+    display:block;
+    margin:0 auto;
+}
+
+/* Form */
 .form-group{
     margin-bottom:15px;
 }
@@ -130,11 +144,28 @@ body{
     border-radius:6px;
 }
 
+/* Phone */
+.phone-box{
+    display:flex;
+}
+
+.phone-box span{
+    padding:12px;
+    background:#eee;
+    border:1px solid #ddd;
+    border-right:none;
+    border-radius:6px 0 0 6px;
+}
+
+.phone-box input{
+    border-radius:0 6px 6px 0;
+}
+
 /* Button */
 .save-btn{
     width:100%;
     padding:10px;
-    background:#4a6cf7;
+    background:#4CAF50;
     color:#fff;
     border:none;
     border-radius:6px;
@@ -143,7 +174,7 @@ body{
 }
 
 .save-btn:hover{
-    background:#3b5be0;
+    background:#3aa043;
 }
 
 /* Error */
@@ -161,25 +192,39 @@ body{
     <div class="logo">Dashboard</div>
 
     <div class="profile">
-        <img src="https://via.placeholder.com/80">
+        <img src="{{.ProfileImage}}" onerror="this.src='https://via.placeholder.com/80'">
         <h3>{{.Name}}</h3>
         <p>{{.Email}}</p>
     </div>
 
     <div class="menu">
         <a href="/dashboard">Dashboard</a>
-        <a href="#">Orders</a>
-        <a href="/edit_profile" style="background:#eef2ff;color:#4a6cf7;">Edit Profile</a>
+        <a href="/user_post">My Post</a>
+        <a href="/edit_profile" style="background:#e8f5e9;color:#4CAF50;">Edit Profile</a>
     </div>
 
     <a href="/login" class="logout">Logout</a>
 </div>
 
-<!-- Main Content -->
+<!-- Main -->
 <div class="main">
+
     <div class="form-card">
         <h2>Edit Profile</h2>
 
+        <!-- IMAGE UPLOAD -->
+        <div class="avatar-upload">
+            <img src="{{.ProfileImage}}" onerror="this.src='https://via.placeholder.com/90'">
+
+            <form method="POST" action="/upload-profile-image" enctype="multipart/form-data">
+                <input type="file" name="image" accept="image/*">
+                <button type="submit" class="save-btn" style="margin-top:10px;">
+                    Upload Image
+                </button>
+            </form>
+        </div>
+
+        <!-- PROFILE FORM -->
         <form method="POST" action="/edit_profile">
 
             <div class="form-group">
@@ -190,11 +235,6 @@ body{
                 {{end}}
             </div>
 
-            <!-- <div class="form-group">
-                <label>Email</label>
-                <input type="email" name="email" value="{{.Email}}" required>
-            </div> -->
-
             <div class="form-group">
                 <label>Country</label>
                 <select name="country" required>
@@ -203,35 +243,22 @@ body{
             </div>
 
             <div class="form-group">
-    <label>Phone</label>
+                <label>Phone</label>
+                <div class="phone-box">
+                    <span>+88</span>
+                    <input type="text" name="phn" value="{{.Phn}}" required>
+                </div>
 
-    <div style="display:flex;">
-        <span style="
-            padding:12px;
-            background:#eee;
-            border:1px solid #ddd;
-            border-right:none;
-            border-radius:6px 0 0 6px;
-        ">
-            +88
-        </span>
+                {{if .Err}}
+                <p class="error">{{.Err}}</p>
+                {{end}}
+            </div>
 
-        <input 
-            type="text" 
-            name="phn" 
-            value="{{.Phn}}" 
-            required
-            style="border-radius:0 6px 6px 0;"
-        >
-    </div>
-
-    {{if .Err}}
-    <p class="error">{{.Err}}</p>
-    {{end}}
-</div>
             <button class="save-btn">Save Changes</button>
         </form>
+
     </div>
+
 </div>
 
 </body>
