@@ -17,10 +17,11 @@ func EditProfileHandle(w http.ResponseWriter, r *http.Request) {
 	models.User_Email = cookie.Value
 	if r.Method == "GET" {
 		tmp.Execute(w, map[string]string{
-			"Name":    User1.Name,
-			"Email":   models.User_Email,
-			"Country": User1.Country,
-			"Phn":     User1.Phone[3:],
+			"ProfileImage": User1.ProfileImage,
+			"Name":         User1.Name,
+			"Email":        models.User_Email,
+			"Country":      User1.Country,
+			"Phn":          User1.Phone[3:],
 		})
 	}
 	if r.Method == "POST" {
@@ -53,7 +54,7 @@ func EditProfileHandle(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, "Update fail Bad Req", 400)
 			return
 		}
-		http.Redirect(w, r, "/dashboard", http.StatusSeeOther)
+		http.Redirect(w, r, "/home", http.StatusSeeOther)
 		return
 	}
 }

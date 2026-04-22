@@ -15,7 +15,7 @@ func UserPost(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	Email := cookie.Value
-	row, Err := models.Db.Query("select id , email, contant,create_time from user_post where email=$1 order by id desc ", Email)
+	row, Err := models.Db.Query("select id , email, contant,create_time,image from user_post where email=$1 order by id desc ", Email)
 	if Err != nil {
 		http.Error(w, "Db Error", 400)
 		return
@@ -25,7 +25,7 @@ func UserPost(w http.ResponseWriter, r *http.Request) {
 	var p Post
 	for row.Next() {
 		var t string
-		row.Scan(&p.ID, &p.UserEmail, &p.Content, &t)
+		row.Scan(&p.ID, &p.UserEmail, &p.Content, &t, &p.ProfileImage)
 		p.CreatedAt = t
 		post = append(post, p)
 		// if Email == p.UserEmail {
@@ -34,11 +34,12 @@ func UserPost(w http.ResponseWriter, r *http.Request) {
 	}
 	if r.Method == "GET" {
 		Tmp.Execute(w, map[string]interface{}{
-			"Name":    User1.Name,
-			"Email":   Email,
-			"Country": User1.Country,
-			"Phn":     User1.Phone,
-			"Posts":   post,
+			"ProfileImage": p.ProfileImage,
+			"Name":         User1.Name,
+			"Email":        Email,
+			"Country":      User1.Country,
+			"Phn":          User1.Phone,
+			"Posts":        post,
 		})
 	}
 }

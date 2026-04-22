@@ -1,171 +1,228 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Register Form</title>
+<meta charset="UTF-8">
+<title>Register</title>
 
-    <style>
-        *{
-            margin:0;
-            padding:0;
-            box-sizing:border-box;
-            font-family:Arial, sans-serif;
-        }
-
-        body{
-            background: linear-gradient(135deg,#667eea,#ACB6E5);
-            height:100vh;
-            display:flex;
-            justify-content:center;
-            align-items:center;
-        }
-
-        .container{
-            background:white;
-            padding:40px;
-            width:400px;
-            border-radius:15px;
-            box-shadow:0 10px 25px rgba(0,0,0,0.2);
-        }
-
-        h2{
-            text-align:center;
-            margin-bottom:25px;
-            color:#333;
-        }
-
-        .input-group{
-            margin-bottom:15px;
-        }
-
-        .input-group label{
-            display:block;
-            margin-bottom:5px;
-            font-weight:bold;
-            color:#555;
-        }
-
-        .input-group input{
-            width:100%;
-            padding:12px;
-            border:1px solid #ccc;
-            border-radius:8px;
-            font-size:14px;
-            transition:0.3s;
-        }
-
-        .input-group input:focus{
-            border-color:#74ebd5;
-            outline:none;
-            box-shadow:0 0 5px rgba(116,235,213,0.5);
-        }
-
-        button{
-            width:100%;
-            padding:12px;
-            background:#15ef48;
-            border:none;
-            color:white;
-            font-size:16px;
-            border-radius:8px;
-            cursor:pointer;
-            transition:0.3s;
-        }
-
-        button:hover{
-            background:#5ecdc3;
-        }
-        select{
-    width:100%;
-    padding:12px;
-    border-radius:8px;
-    border:1px solid #ccc;
-    font-size:16px;
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI', sans-serif;
 }
-    </style>
+
+body{
+    display:flex;
+    background:#f5f7fb;
+}
+
+/* Sidebar */
+.sidebar{
+    width:260px;
+    height:100vh;
+    background:#fff;
+    padding:25px;
+    border-right:1px solid #eee;
+    display:flex;
+    flex-direction:column;
+}
+
+.logo{
+    font-size:20px;
+    font-weight:bold;
+    color:#4CAF50;
+    margin-bottom:25px;
+}
+
+.sidebar-text{
+    font-size:13px;
+    color:#666;
+    margin-top:10px;
+}
+
+/* Main */
+.main{
+    flex:1;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+/* Card */
+.form-card{
+    width:450px;
+    background:#fff;
+    padding:30px;
+    border-radius:12px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.05);
+}
+
+.form-card h2{
+    text-align:center;
+    margin-bottom:20px;
+    color:#333;
+}
+
+/* Input */
+.form-group{
+    margin-bottom:15px;
+}
+
+.form-group label{
+    font-size:13px;
+    font-weight:600;
+    color:#444;
+}
+
+.form-group input,
+.form-group select{
+    width:100%;
+    padding:10px;
+    margin-top:5px;
+    border:1px solid #ddd;
+    border-radius:6px;
+    outline:none;
+}
+
+.form-group input:focus{
+    border-color:#4CAF50;
+}
+
+/* Phone */
+.phone-box{
+    display:flex;
+}
+
+.phone-box span{
+    padding:10px;
+    background:#eee;
+    border:1px solid #ddd;
+    border-right:none;
+    border-radius:6px 0 0 6px;
+}
+
+.phone-box input{
+    border-radius:0 6px 6px 0;
+    flex:1;
+}
+
+/* Button */
+.btn{
+    width:100%;
+    padding:10px;
+    background:#4CAF50;
+    color:#fff;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+    margin-top:10px;
+}
+
+.btn:hover{
+    background:#3aa043;
+}
+
+/* Error */
+.error{
+    color:red;
+    font-size:12px;
+    margin-top:3px;
+}
+
+/* link */
+.link{
+    text-align:center;
+    margin-top:15px;
+    font-size:13px;
+}
+
+.link a{
+    color:#4CAF50;
+    text-decoration:none;
+}
+</style>
 </head>
 
 <body>
 
-    <div class="container">
-        <h2>Registration Form</h2>
+<!-- Sidebar -->
+<div class="sidebar">
+    <div class="logo">My App</div>
+    <p class="sidebar-text">
+        Create your account and start using dashboard system.
+    </p>
+</div>
+
+<!-- Main -->
+<div class="main">
+
+    <div class="form-card">
+        <h2>Register</h2>
+
         <form method="post" action="/register">
-            
-            
-            <div class="input-group">
+
+            <div class="form-group">
                 <label>Name</label>
                 <input type="text" name="name" value="{{.Name}}" required>
                 {{if .ErrName}}
-                <p style="color: red;">{{.ErrName}}</p>
-                {{end}}
-            </div>
-            
-            <div class="input-group">
-                <label>Email</label>
-                <input type="text" name="email" value="{{.Email}}" required>
-              {{if .Error}}
-                <p style="color: red;">{{.Error}}</p>
+                <p class="error">{{.ErrName}}</p>
                 {{end}}
             </div>
 
-            <div class="input-group">
+            <div class="form-group">
+                <label>Email</label>
+                <input type="text" name="email" value="{{.Email}}" required>
+                {{if .Error}}
+                <p class="error">{{.Error}}</p>
+                {{end}}
+            </div>
+
+            <div class="form-group">
                 <label>Country</label>
                 <select name="country" required>
                     <option value="">Select Country</option>
-                    <option value="Bangladesh">Bangladesh</option>
+                    <option>Bangladesh</option>
                 </select>
-             
             </div>
-            
-            <div class="input-group">
+
+            <div class="form-group">
                 <label>Phone</label>
-                <input type="text" value="+88" name="mobile" value="{{.Phone}}" required>
+                <div class="phone-box">
+                    <span>+88</span>
+                    <input type="text" name="mobile" value="{{.Phone}}" required>
+                </div>
                 {{if .PhnError}}
-                <p style="color: red;">{{.PhnError}}</p>
+                <p class="error">{{.PhnError}}</p>
                 {{end}}
             </div>
 
-            <div class="input-group">
+            <div class="form-group">
                 <label>Password</label>
                 <input type="password" name="pass" required>
                 {{if .ErrPass}}
-                <p style="color: red;">{{.ErrPass}}</p>
+                <p class="error">{{.ErrPass}}</p>
                 {{end}}
             </div>
 
-            <div class="input-group">
+            <div class="form-group">
                 <label>Confirm Password</label>
-                <input type="password" name="confpass"  required>
+                <input type="password" name="confpass" required>
                 {{if .PassError}}
-                <p style="color: red;">{{.PassError}}</p>
+                <p class="error">{{.PassError}}</p>
                 {{end}}
             </div>
 
-            <button type="submit">Register</button><br><br>
-            <p>already have an account <a href="/login">Login here</a></p>
+            <button class="btn" type="submit">Register</button>
+
+            <div class="link">
+                Already have an account? <a href="/login">Login</a>
+            </div>
 
         </form>
     </div>
 
+</div>
+
 </body>
 </html>
-
-
-
-<!-- <!DOCTYPE html>
-<html>  
-    <head>
-        <title>Register</title>
-    </head>
-    <body>
-        <h2>Registration Form</h2>
-        <form method="post" action="/register">
-            Name: <input type ="text" name ="name" required><br><br>
-            Email: <input type ="text" name ="email" required> <br><br>
-            Country: <input type ="text" name ="country" required><br><br>
-            Phone : <input type="text" name = "mobile" required><br><br>
-            Password:<input type="password" name="pass" required><br><br>
-            Confirm password: <input type="password" name="confpass" required> <br><br>
-            <button type="submit">Register</button>
-        </form>
-    </body>
-</html> -->

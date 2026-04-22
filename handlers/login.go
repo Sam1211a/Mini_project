@@ -41,7 +41,7 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 			Path:  "/",
 		}
 		http.SetCookie(w, cookie)
-		http.Redirect(w, r, "/dashboard", http.StatusSeeOther)
+		http.Redirect(w, r, "/home", http.StatusSeeOther)
 		// http.ServeFile(w, r, "templates/user_post.html")
 	}
 	// http.ServeFile(w, r, "templates/login.html")

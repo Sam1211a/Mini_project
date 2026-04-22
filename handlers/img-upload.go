@@ -38,5 +38,10 @@ func UploadImg(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "DB Error img", 400)
 		return
 	}
-	http.Redirect(w, r, "/dashboard", http.StatusSeeOther)
+	_, err = models.Db.Exec("update user_post set image=$1 where email=$2", filepath, Email)
+	if err != nil {
+		http.Error(w, "DB img Error", 400)
+		return
+	}
+	http.Redirect(w, r, "/home", http.StatusSeeOther)
 }

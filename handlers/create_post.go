@@ -17,14 +17,15 @@ func CreatePost(w http.ResponseWriter, r *http.Request) {
 	models.User_Email = cookie.Value
 	if r.Method == "POST" {
 		user_post := r.FormValue("content")
-
-		sqlstatement = "insert into user_post (email,contant) values($1,$2)"
-		_, err := models.Db.Exec(sqlstatement, models.User_Email, user_post)
+		var user_image string
+		models.Db.QueryRow(`select image from information where email=$1`, models.User_Email).Scan(&user_image)
+		sqlstatement = "insert into user_post (email,contant,image) values($1,$2,$3)"
+		_, err := models.Db.Exec(sqlstatement, models.User_Email, user_post, user_image)
 		if err != nil {
 			http.Error(w, "Post Not Executed", 400)
 			return
 		}
-		http.Redirect(w, r, "/dashboard", http.StatusSeeOther)
+		http.Redirect(w, r, "/home", http.StatusSeeOther)
 	}
 	// http.ServeFile(w, r, "templates/dashboard.html")
 }

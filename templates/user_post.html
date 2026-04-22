@@ -222,7 +222,7 @@ body{
     <div class="logo">Dashboard</div>
 
     <div class="profile">
-        <img src="https://via.placeholder.com/80">
+        <img src="/{{.ProfileImage}}" onerror="this.src='https://via.placeholder.com/80'">
         <h3>{{.Name}}</h3>
         <p>{{.Email}}</p>
         <p>{{.Country}}</p>
@@ -232,7 +232,8 @@ body{
     </div>
 
     <div class="menu">
-        <a href="/dashboard">Dashboard</a>
+        <!-- <a href="/dashboard" >Dashboard</a> -->
+        <a href="/home">Home</a>
         <a href="/user_post" style="background:#e8f5e9;color:#4CAF50;">My Post</a>
     </div>
 
@@ -267,9 +268,9 @@ body{
                 <td>{{.Content}}</td>
                 <td>{{.CreatedAt}}</td>
                 <td>
-                    <span class="btn edit" onclick="openEdit('{{.ID}}', `{{.Content}}`)">✏️</span>
-                    <a href="/delete-post?id={{.ID}}" class="btn delete">🗑</a>
-                    <span class="btn copy" onclick="copyPost(this)">📋</span>
+                    <span class="btn edit" onclick="openEdit('{{.ID}}', `{{.Content}}`)">✏️ Edit</span>
+                    <a href="/delete-post?id={{.ID}}" class="btn delete">🗑 Delete</a>
+                    <span class="btn copy" onclick="copyPost(this)">📋 Copy</span>
                 </td>
             </tr>
             {{end}}

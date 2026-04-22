@@ -1,158 +1,184 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Login of Users</title>
+<meta charset="UTF-8">
+<title>Login</title>
 
-    <style>
-        *{
-            margin:0;
-            padding:0;
-            box-sizing:border-box;
-            font-family:Arial, sans-serif;
-        }
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI', sans-serif;
+}
 
-        body{
-            background: linear-gradient(135deg,#667eea,#ACB6E5);
-            height:100vh;
-            display:flex;
-            justify-content:center;
-            align-items:center;
-        }
+body{
+    display:flex;
+    background:#f5f7fb;
+}
 
-        .login-box{
-            background:white;
-            padding:40px;
-            width:380px;
-            border-radius:15px;
-            box-shadow:0 10px 30px rgba(0,0,0,0.2);
-        }
+/* Sidebar */
+.sidebar{
+    width:260px;
+    height:100vh;
+    background:#fff;
+    padding:25px;
+    border-right:1px solid #eee;
+    display:flex;
+    flex-direction:column;
+}
 
-        .login-box h1{
-            text-align:center;
-            color:#333;
-            margin-bottom:10px;
-            font-size:28px;
-        }
+.logo{
+    font-size:20px;
+    font-weight:bold;
+    color:#4CAF50;
+    margin-bottom:25px;
+}
 
-        .login-box h2{
-            text-align:center;
-            color:gray;
-            margin-bottom:25px;
-            font-size:16px;
-            font-weight:normal;
-        }
+.sidebar-text{
+    font-size:13px;
+    color:#666;
+}
 
-        .input-group{
-            margin-bottom:20px;
-        }
+/* Main */
+.main{
+    flex:1;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
 
-        .input-group label{
-            display:block;
-            margin-bottom:5px;
-            font-weight:bold;
-            color:#444;
-        }
+/* Card */
+.login-card{
+    width:420px;
+    background:#fff;
+    padding:35px;
+    border-radius:12px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.05);
+}
 
-        .input-group input{
-            width:100%;
-            padding:12px;
-            border:1px solid #ccc;
-            border-radius:8px;
-            font-size:14px;
-            transition:0.3s;
-        }
+.login-card h1{
+    text-align:center;
+    font-size:24px;
+    margin-bottom:5px;
+    color:#333;
+}
 
-        .input-group input:focus{
-            border-color:#667eea;
-            outline:none;
-            box-shadow:0 0 5px rgba(102,126,234,0.5);
-        }
+.login-card p{
+    text-align:center;
+    font-size:13px;
+    color:#777;
+    margin-bottom:25px;
+}
 
-        button{
-            width:100%;
-            padding:12px;
-            background:#13f344;
-            color:white;
-            border:none;
-            border-radius:8px;
-            font-size:16px;
-            cursor:pointer;
-            transition:0.3s;
-        }
+/* input */
+.form-group{
+    margin-bottom:15px;
+}
 
-        button:hover{
-            background:#449353;
-        }
+.form-group label{
+    font-size:13px;
+    font-weight:600;
+    color:#444;
+}
 
-        .register-link{
-            text-align:center;
-            margin-top:15px;
-        }
+.form-group input{
+    width:100%;
+    padding:10px;
+    margin-top:5px;
+    border:1px solid #ddd;
+    border-radius:6px;
+    outline:none;
+}
 
-        .register-link a{
-            color:#667eea;
-            text-decoration:none;
-            font-weight:bold;
-        }
+.form-group input:focus{
+    border-color:#4CAF50;
+}
 
-        .register-link a:hover{
-            text-decoration:underline;
-        }
+/* button */
+.btn{
+    width:100%;
+    padding:10px;
+    background:#4CAF50;
+    color:#fff;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+    font-size:15px;
+}
 
-    </style>
+.btn:hover{
+    background:#3aa043;
+}
+
+/* error */
+.error{
+    color:red;
+    font-size:12px;
+    margin-top:5px;
+}
+
+/* link */
+.link{
+    text-align:center;
+    margin-top:15px;
+    font-size:13px;
+}
+
+.link a{
+    color:#4CAF50;
+    text-decoration:none;
+}
+</style>
 </head>
 
 <body>
 
-    <div class="login-box">
+<!-- Sidebar -->
+<div class="sidebar">
+    <div class="logo">My App</div>
+    <p class="sidebar-text">
+        Login to access your dashboard, posts and profile system.
+    </p>
+</div>
+
+<!-- Main -->
+<div class="main">
+
+    <div class="login-card">
 
         <h1>Welcome Back</h1>
-        <h2>Login to your account</h2>
+        <p>Login to your account</p>
 
         <form method="post" action="/login">
 
-            <div class="input-group">
+            <div class="form-group">
                 <label>Email</label>
                 <input type="text" name="emil" value="{{.Email}}" required>
                 {{if .EmailError}}
-                <p style="color: red;">{{.EmailError}}</p>
+                <p class="error">{{.EmailError}}</p>
                 {{end}}
             </div>
 
-            <div class="input-group">
+            <div class="form-group">
                 <label>Password</label>
                 <input type="password" name="pass" required>
-                 {{if .PassEr}}
-                <p style="color: red;">{{.PassEr}}</p>
+                {{if .PassEr}}
+                <p class="error">{{.PassEr}}</p>
                 {{end}}
             </div>
 
-            <button type="submit">Login</button>
+            <button class="btn" type="submit">Login</button>
 
-            <div class="register-link">
-                Don't have account? <a href="/register">Register</a>
+            <div class="link">
+                Don't have an account? <a href="/register">Register</a>
             </div>
 
         </form>
 
     </div>
 
+</div>
+
 </body>
 </html>
-
-
-<!-- <!DOCTYPE html>
-<html>
-    <head>
-        <title>Login of Users</title>
-    </head>
-    <body>
-        <h1>Hi this Login page </h1>
-        <h2>I am connected succesfully</h2>
-        <form method="post" action="/login">
-            Email: <input type="text" name = "emil" required><br><br>
-            Password: <input type="password" name ="pass" required><br><br>
-            <button type="submit">Login</button>
-        </form>
-    </body>
-</html> -->

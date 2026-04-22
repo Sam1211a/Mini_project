@@ -198,7 +198,8 @@ body{
     </div>
 
     <div class="menu">
-        <a href="/dashboard">Dashboard</a>
+        <!-- <a href="/dashboard" >Dashboard</a> -->
+        <a href="/home">Home</a>
         <a href="/user_post">My Post</a>
         <a href="/edit_profile" style="background:#e8f5e9;color:#4CAF50;">Edit Profile</a>
     </div>
@@ -217,7 +218,7 @@ body{
             <img src="{{.ProfileImage}}" onerror="this.src='https://via.placeholder.com/90'">
 
             <form method="POST" action="/upload-image" enctype="multipart/form-data">
-                <input type="file" name="image" accept="image/*">
+                <input type="file" name="image" accept="image/*" required>
                 <button type="submit" class="save-btn" style="margin-top:10px;">
                     Upload Image
                 </button>
