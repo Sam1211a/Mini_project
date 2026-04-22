@@ -216,7 +216,7 @@ body{
         <div class="avatar-upload">
             <img src="{{.ProfileImage}}" onerror="this.src='https://via.placeholder.com/90'">
 
-            <form method="POST" action="/upload-profile-image" enctype="multipart/form-data">
+            <form method="POST" action="/upload-image" enctype="multipart/form-data">
                 <input type="file" name="image" accept="image/*">
                 <button type="submit" class="save-btn" style="margin-top:10px;">
                     Upload Image

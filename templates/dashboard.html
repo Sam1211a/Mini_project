@@ -149,7 +149,7 @@ body{display:flex;background:#f5f7fb;}
     <div class="logo">Dashboard</div>
 
     <div class="profile">
-        <img src="https://via.placeholder.com/80">
+        <img src="/{{.ProfileImage}}" onerror="this.src='https://via.placeholder.com/80'">
         <h3>{{.Name}}</h3>
         <p>{{.Email}}</p>
         <p>{{.Country}}</p>
@@ -191,7 +191,7 @@ body{display:flex;background:#f5f7fb;}
         <div class="post-card">
 
             <div class="post-top">
-                <img src="https://via.placeholder.com/45" class="avatar">
+                <img src="/{{.ProfileImage}}" onerror="this.src='https://via.placeholder.com/80'" class="avatar">
                 <div class="user-info">
                     <div class="post-header">{{.UserEmail}}</div>
                     <div class="post-time">{{.CreatedAt}}</div>

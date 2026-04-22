@@ -93,8 +93,8 @@ func RegisterHandle(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, err.Error(), 500)
 			return
 		}
-		http.Redirect(w, r, "/login", http.StatusSeeOther)
+		// http.Redirect(w, r, "/regis", http.StatusSeeOther)
+		http.ServeFile(w, r, "templates/register_succesfully.html")
 		return
 	}
-	http.ServeFile(w, r, "templates/register.html")
 }

@@ -24,6 +24,8 @@ func main() {
 	http.HandleFunc("/delete-post", handlers.DeletePost)
 	http.HandleFunc("/user_post", handlers.UserPost)
 	http.HandleFunc("/update-post", handlers.UpdatePost)
+	http.HandleFunc("/upload-image", handlers.UploadImg)
+	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 	fmt.Println(`Server running at http://localhost:8080/login`)
 	http.ListenAndServe(":8080", nil)
 	defer models.Db.Close()

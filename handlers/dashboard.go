@@ -10,22 +10,27 @@ var Tmpl = template.Must(template.ParseFiles("templates/dashboard.html"))
 var User1 models.Users
 
 type Post struct {
-	ID        int
-	UserEmail string
-	Content   string
-	CreatedAt string
+	ID           int
+	UserEmail    string
+	Content      string
+	CreatedAt    string
+	ProfileImage string
 }
 
 func DashboardHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "GET" {
+
 		cookie, err := r.Cookie("user_email")
 		if err != nil {
 			http.Error(w, "Cookies not Found", 400)
 			return
 		}
 		Email := cookie.Value
-		err = models.Db.QueryRow("select name,phone,country from information where email=$1", Email).Scan(&User1.Name, &User1.Phone, &User1.Country)
-
+		err = models.Db.QueryRow("select name,phone,country,image from information where email=$1", Email).Scan(&User1.Name, &User1.Phone, &User1.Country, &User1.ProfileImage)
+		if err != nil {
+			http.Error(w, "Db img error", 400)
+			return
+		}
 		var P Post
 		row, Err := models.Db.Query("select id, email, contant, create_time from user_post order by create_time desc")
 		if err != nil {
@@ -44,15 +49,16 @@ func DashboardHandler(w http.ResponseWriter, r *http.Request) {
 			var t string
 			row.Scan(&P.ID, &P.UserEmail, &P.Content, &t)
 			P.CreatedAt = t
-
+			P.ProfileImage = User1.ProfileImage
 			posts = append(posts, P)
 		}
 		Tmpl.Execute(w, map[string]interface{}{
-			"Name":    User1.Name,
-			"Email":   Email,
-			"Country": User1.Country,
-			"Phn":     User1.Phone,
-			"Posts":   posts,
+			"ProfileImage": User1.ProfileImage,
+			"Name":         User1.Name,
+			"Email":        Email,
+			"Country":      User1.Country,
+			"Phn":          User1.Phone,
+			"Posts":        posts,
 		})
 		// http.ServeFile(w, r, "templates/profile.html")
 	}
